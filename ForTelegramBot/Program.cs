@@ -12,6 +12,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationContext>(opts => opts.UseSqlite("Data Source=DBtelegram.db"), ServiceLifetime.Transient);
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
