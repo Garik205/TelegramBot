@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TelegramDataBase;
 using TelegramDataBase.Models;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ForTelegramBot.Controllers
 {
@@ -9,17 +11,22 @@ namespace ForTelegramBot.Controllers
     public class ForUsersTelegramController : ControllerBase
     {
         private readonly ApplicationContext _db;
+        private readonly IMapper _mapper;
 
-        public ForUsersTelegramController(ApplicationContext context)
+        public ForUsersTelegramController(ApplicationContext context, IMapper mapper)
         {
             _db = context;
+            _mapper = mapper;
         }
 
         [HttpPost] // Добавление пользователя в бд
-        public async Task<ActionResult<User>> Post(User user)
+        public async Task<ActionResult<ModelUser>> Post(ModelUser modelUser)
         {
-            if (user == null) { return BadRequest(); }
-            if (_db.TelegramUsers.Any(x => x.FirstName == user.FirstName)) { return BadRequest("Пользователь с таким именем уже существует!"); }
+            if (modelUser == null) { return BadRequest(); }
+            if (_db.TelegramUsers.Any(x => x.FirstName == modelUser.FirstName)) { return BadRequest("Пользователь с таким именем уже существует!"); }
+
+            User user = _mapper.Map<User>(modelUser);
+
             _db.TelegramUsers.Add(user);
             await _db.SaveChangesAsync();
             return Ok(user);

@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationContext>(opts => opts.UseSqlite("Data Source=DBtelegram.db"), ServiceLifetime.Transient);
-
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // Добавление Automapper в DI контейнер
 
 var app = builder.Build();
 
