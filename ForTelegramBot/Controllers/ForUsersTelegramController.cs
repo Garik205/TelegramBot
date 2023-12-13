@@ -2,7 +2,6 @@
 using TelegramDataBase;
 using TelegramDataBase.Models;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ForTelegramBot.Controllers
 {
