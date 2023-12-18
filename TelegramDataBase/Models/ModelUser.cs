@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Net.Sockets;
+using System.Text.Json.Serialization;
 
 namespace TelegramDataBase.Models
 {

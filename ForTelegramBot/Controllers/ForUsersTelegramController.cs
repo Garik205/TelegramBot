@@ -22,13 +22,14 @@ namespace ForTelegramBot.Controllers
         public async Task<ActionResult<ModelUser>> Post(ModelUser modelUser)
         {
             if (modelUser == null) { return BadRequest(); }
-            if (_db.TelegramUsers.Any(x => x.FirstName == modelUser.FirstName)) { return BadRequest("Пользователь с таким именем уже существует!"); }
+            else if (_db.TelegramUsers.Any(x => x.FirstName == modelUser.FirstName)) { return BadRequest("Пользователь с таким именем уже существует!"); }
+            else if(modelUser.Password.Length < 6) { return BadRequest("Пароль должен содержать больше 6 символов!"); }
 
             User user = _mapper.Map<User>(modelUser);
-
             _db.TelegramUsers.Add(user);
             await _db.SaveChangesAsync();
             return Ok(user);
+            
         }
 
 
