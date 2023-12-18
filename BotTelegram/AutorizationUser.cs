@@ -1,8 +1,8 @@
 ﻿
-
 namespace BotTelegram
 {
-    protected class AutorizationUser
+    public class AutorizationUser
     {
+
     }
 }
