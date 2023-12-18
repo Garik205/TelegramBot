@@ -11,8 +11,8 @@ using TelegramDataBase;
 namespace TelegramDataBase.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20231218113137_IdChatTelToTelegramUsersAdded")]
-    partial class IdChatTelToTelegramUsersAdded
+    [Migration("20231218160922_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,10 @@ namespace TelegramDataBase.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RefKey")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

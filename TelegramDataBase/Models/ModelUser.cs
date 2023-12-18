@@ -18,5 +18,8 @@ namespace TelegramDataBase.Models
 
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
         public string Password { get; set; } = null!;
+
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        public long IdChatTel { get; set; }
     }
 }

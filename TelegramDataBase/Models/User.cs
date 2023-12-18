@@ -7,17 +7,21 @@ namespace TelegramDataBase.Models
     {
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        [Required]
         public string FirstName { get; set; } = null!;
 
-        [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        [Required]
         public string LastName { get; set; } = null!;
 
-        [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        [Required]
         public string Email { get; set; } = null!;
 
-        [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        [Required]
         public string Password { get; set; } = null!;
+
+        [Required]
         public long IdChatTel { get; set; }
+        
+        public string RefKey { get; set; } = Guid.NewGuid().ToString();
     }
 }

@@ -19,7 +19,9 @@ namespace TelegramDataBase.Migrations
                     FirstName = table.Column<string>(type: "TEXT", nullable: false),
                     LastName = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", nullable: false)
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    IdChatTel = table.Column<long>(type: "INTEGER", nullable: false),
+                    RefKey = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

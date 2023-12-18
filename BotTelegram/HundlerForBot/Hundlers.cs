@@ -10,12 +10,6 @@ namespace BotTelegram.HundlerForBot
 {
     public class Hundlers
     {
-        private long _botId { get; set; }
-
-        public Hundlers(long botId)
-        {
-            _botId = botId;
-        }
         public async Task UpdateHandler(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
 
@@ -23,13 +17,9 @@ namespace BotTelegram.HundlerForBot
 
             try // обработчик ошибок, чтобы в случае ошибок мой бот не падал
             {
-                var t = update.Message;
-                //var isBot = update.Message.UserShared.UserId == _botId;
 
-                //if (isBot)
-                //    return;
-
-
+                //bool flag = false;
+                
                 switch (update.Type) // для обработки Update
                 {
                     case UpdateType.Message:
@@ -37,36 +27,42 @@ namespace BotTelegram.HundlerForBot
                             Console.WriteLine($"Пришло новое сообщение!\nID User: {(update.Message)?.Chat.Id}. Сообщение: {(update.Message)?.Text}");
 
                             var message = update.Message; // Это пременная хранит себе всё, что связано с сообщениями
-                            var chat = message.Chat; // Содержит всю информацию о чате
+                            var chat = message?.Chat; // Содержит всю информацию о чате
 
-                            switch (message.Type)
+                            switch (message?.Type)
                             {
                                 case MessageType.Text:
                                     {
                                         if (message.Text == "/start")
                                         {
-                                            botClient?.SendTextMessageAsync(chatId: update.Message.Chat.Id, text: "Привет! Я умею показвыать погоду, выводить Ваш личный реферальный ключ, а также выводить список пользователей, которые зарегестрировались под Вашим реферальным ключом.\nЧтобы использовать весь этот фунцкионал, вы должны авторизоваться!)");
-                                            var button = new KeyboardButton("/autorization"); // Создание кнопки
-                                            var replyMarkup = new ReplyKeyboardMarkup(button); // Разметка для кнопки
+                                            botClient?.SendTextMessageAsync(chatId: update.Message.Chat.Id, text: "Привет! Я умею показвыать погоду, выводить Ваш личный реферальный ключ, а также выводить список пользователей, которые зарегестрировались под Вашим реферальным ключом.");
+                                            var list = new List<KeyboardButton> {new KeyboardButton("Узнать ID"), new KeyboardButton("\U0001F324Погода"), new KeyboardButton("Реферальный ключ"), new KeyboardButton("Список пользователей использующие мой ключ") };
 
-                                            if (message.Text == "/autorization")
-                                            {
-                                                //bool valid = false; // flag
-                                                //long IdChat = message.Chat.Id;
-                                                //var autorization = new AutorizationUser();
-                                            }
-                                            else botClient?.SendTextMessageAsync(chatId: update.Message.Chat.Id, text: "Вы должны авторизоваться!" );
-
-                                            //var list = new List<KeyboardButton> { new KeyboardButton("\U0001F324Погода"), new KeyboardButton("Реферальный\nключ"), new KeyboardButton("Список пользователей\nиспользующие мой ключ") };
-
-                                                //var markup = new ReplyKeyboardMarkup(list) {ResizeKeyboard = true };
-
-                                                //await botClient.SendTextMessageAsync(chat.Id, "Выберите действие:", replyMarkup: markup); // Сообщение с кнопкой погода
-
+                                            var replyMarkup = new ReplyKeyboardMarkup(list); // Разметка для кнопки
+                                            var markup = new ReplyKeyboardMarkup(list) {ResizeKeyboard = true }; // Отвечает за уменьшение кнопок на плите
+                                            await botClient.SendTextMessageAsync(chat.Id, "Выберите действие:", replyMarkup: replyMarkup);
                                             return;
                                         }
 
-                                        else if (message.Text == "Погода")
+                                        else if (message.Text == "Узнать ID")
+                                        {
+                                            await botClient.SendTextMessageAsync(chatId: chat.Id, text: $"{update.Message?.Chat.Id}, используйте его при регистрации, чтобы пользоваться возможностями бота");
+                                            return;
+                                        }
+                                        
+                                        else if(message.Text == "Реферальный ключ")
+                                        {
+                                            var key = new learnRefKey();
+
+                                            await botClient.SendTextMessageAsync(chatId: chat.Id, text: $"Ваш реферальный ключ: {key.refKey(chat.Id)}");
+                                        }
+
+                                        else if(message.Text == "Список пользователей использующие мой ключ")
+                                        {
+                                            
+                                        }
+
+                                        else if (message.Text == "\U0001F324Погода")
                                         {
                                             var city = await botClient.SendTextMessageAsync(chat.Id, "Введите город"); // получаем город введённый от пользователя
 

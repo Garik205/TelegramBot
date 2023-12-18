@@ -1,10 +1,7 @@
 ﻿using BotTelegram.HundlerForBot;
 using Telegram.Bot;
-using Telegram.Bot.Args;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types.Enums;
-using System.Net;
-using Newtonsoft.Json;
 
 
 namespace BotTelegram
@@ -19,8 +16,7 @@ namespace BotTelegram
         {
             _botClient = new TelegramBotClient("6543089403:AAG0KkWyvB8LIbX7BhQB1S9Vpl9MoSpYdz4"); // Присваиваю в поле значение с передаваемым параметром(токен бота)
             var me = await _botClient.GetMeAsync(); // Поле для хранения данных о боте
-            var handlers = new Hundlers(me.Id);
-
+            var handlers = new Hundlers();
 
             _receiverOptions = new ReceiverOptions // присваиваем значение настройки бота
             {
