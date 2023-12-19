@@ -5,6 +5,10 @@ namespace TelegramDataBase.Models
     public class User
     {
         [Required]
+        [Key]
+        public string ReferalKey { get; set; } = Guid.NewGuid().ToString();
+        
+        [Required]
         public long IdChatTel { get; set; }
 
         [Required]
@@ -16,7 +20,9 @@ namespace TelegramDataBase.Models
         [Required]
         public string Password { get; set; } = null!;
 
+
         [Required]
-        public string ReferalKey { get; set; } = Guid.NewGuid().ToString();
+        public string CheckRefKey { get; set; } = null!;
+        
     }
 }

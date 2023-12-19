@@ -1,6 +1,5 @@
-﻿
-
-using TelegramDataBase;
+﻿using TelegramDataBase;
+using TelegramDataBase.Models;
 
 namespace BotTelegram
 {
@@ -8,10 +7,13 @@ namespace BotTelegram
     {
         private ApplicationContext _db;
         public forUsersRefKey(ApplicationContext context) { _db = context; }
+        public forUsersRefKey() { }
 
-        //public string printUsers(string refKey)
-        //{
-        //    var user = 
-        //}
+        public List<User> printUsers(long id)
+        {
+            var refkey = _db.RegistrationUsers.FirstOrDefault(x => x.IdChatTel == id);
+            var listuser = _db.RegistrationUsers.Where(c => c.CheckRefKey == refkey.ReferalKey).ToList();
+            return listuser;
+        }
     }
 }

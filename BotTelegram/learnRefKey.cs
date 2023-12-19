@@ -1,12 +1,13 @@
-﻿
+﻿using System;
 using TelegramDataBase;
+using TelegramDataBase.Models;
 
 namespace BotTelegram
 {
     public class learnRefKey
     {
         private ApplicationContext _db;
-
+        
         public learnRefKey(ApplicationContext context) 
         {
             _db = context;
@@ -14,14 +15,15 @@ namespace BotTelegram
 
         public learnRefKey() { }
 
-        public string refKey(long idChat)
+        public string refKey(long id)
         {
-            var user = _db.TelegramUsers.FirstOrDefault(x => x.IdChatTel == idChat);
-            if (user == null)
+            if (_db == null)
             {
-                return "Реферальный ключ отсутсвует";
+                return "";
             }
-            return user.RefKey;
+
+            var user = _db.RegistrationUsers.First(c => c.IdChatTel == id);
+            return user.ReferalKey;
         }
     }
 }

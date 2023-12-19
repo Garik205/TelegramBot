@@ -14,8 +14,10 @@ namespace TelegramDataBase.Models
         public string Email { get; set; } = null!;
 
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        [MinLength(5)]
         public string Password { get; set; } = null!;
 
-        public string KeyR { get; set; } = null!; // Поле для проверки заполнения реф. ключа
+        [Required(ErrorMessage = "Поле обязательно для заполения")]
+        public string CheckRefKey { get; set; } = null!;
     }
 }

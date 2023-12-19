@@ -5,21 +5,20 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using Newtonsoft.Json;
 using System.Net;
+using TelegramDataBase;
 
 namespace BotTelegram.HundlerForBot
 {
     public class Hundlers
     {
+
+        
+
         public async Task UpdateHandler(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
-
-            //throw new Exception();
-
             try // обработчик ошибок, чтобы в случае ошибок мой бот не падал
             {
 
-                //bool flag = false;
-                
                 switch (update.Type) // для обработки Update
                 {
                     case UpdateType.Message:
@@ -49,7 +48,7 @@ namespace BotTelegram.HundlerForBot
                                             await botClient.SendTextMessageAsync(chatId: chat.Id, text: $"{update.Message?.Chat.Id}, используйте его при регистрации, чтобы пользоваться возможностями бота");
                                             return;
                                         }
-                                        
+
                                         else if(message.Text == "Реферальный ключ")
                                         {
                                             var key = new learnRefKey();
@@ -59,7 +58,8 @@ namespace BotTelegram.HundlerForBot
 
                                         else if(message.Text == "Список пользователей использующие мой ключ")
                                         {
-                                            
+                                            var key = new forUsersRefKey();
+                                            await botClient.SendTextMessageAsync(chatId: chat.Id, text: $"{key.printUsers(chat.Id)}");
                                         }
 
                                         else if (message.Text == "\U0001F324Погода")
