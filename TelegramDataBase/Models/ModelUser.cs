@@ -1,17 +1,14 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Net.Sockets;
-using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TelegramDataBase.Models
 {
     public class ModelUser
     {
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
-        public string FirstName { get; set; } = null!;
+        public long IdChatTel { get; set; }
 
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
-        public string LastName { get; set; } = null!;
+        public string FirstName { get; set; } = null!;
 
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
         public string Email { get; set; } = null!;
@@ -19,7 +16,6 @@ namespace TelegramDataBase.Models
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
         public string Password { get; set; } = null!;
 
-        [Required(ErrorMessage = "Поле обязательно для заполнения")]
-        public long IdChatTel { get; set; }
+        public string KeyR { get; set; } = null!; // Поле для проверки заполнения реф. ключа
     }
 }

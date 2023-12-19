@@ -9,9 +9,9 @@ namespace BotTelegram
         private ApplicationContext _db;
         public forUsersRefKey(ApplicationContext context) { _db = context; }
 
-        public string printUsers(string refKey)
-        {
-            var user = 
-        }
+        //public string printUsers(string refKey)
+        //{
+        //    var user = 
+        //}
     }
 }
