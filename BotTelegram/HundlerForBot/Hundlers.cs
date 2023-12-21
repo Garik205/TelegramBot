@@ -6,12 +6,13 @@ using Telegram.Bot.Types.ReplyMarkups;
 using Newtonsoft.Json;
 using System.Net;
 using TelegramDataBase;
+using Microsoft.EntityFrameworkCore;
 
 namespace BotTelegram.HundlerForBot
 {
     public class Hundlers
     {
-
+        private DbContextOptions _context;
         
 
         public async Task UpdateHandler(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)

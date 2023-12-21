@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using TelegramDataBase.Models;
 
 namespace TelegramDataBase
@@ -7,6 +8,17 @@ namespace TelegramDataBase
     {
         public DbSet<User> RegistrationUsers { get; set; } = null!;
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
-        public ApplicationContext() { }
+
+        public ApplicationContext() 
+        {
+            
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            Database.EnsureCreated();
+            optionsBuilder.UseSqlite("Data Source=DBtelegram.db");
+        }
     }
 }
